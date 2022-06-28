@@ -1,0 +1,33 @@
+version: "3" 
+services:
+  api: 
+    image: marswangyang525/fastapi-backend
+    depends_on:
+      - postgres # 在建立起api這個image前，先建立postgres image
+    ports: 
+      - 8000:8000 # <port on localhost, 就是在本機上測試時所寫localhost:8000>:<port on container>
+    volumes: # 利用binding的方式，把local machine上面的檔案sync up with docker container當中的dir
+      - ./:/usr/src/app:ro  # <the-file/dir-range-you-want-to-bind>:<container-dir>:ro (ro代表read-only)
+    # command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+    # env_file: 可以利用env file來傳入env variables的檔案
+    #   - ./.env
+    environment: # 或者直接把env variables給傳入docker container當中
+      - DATABASE_HOSTNAME=${DATABASE_HOSTNAME} # 不用ip address，可以直接用connect to postgres
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_USERNAME=${DATABASE_USERNAME}
+      - SECRET_KEY=${SECRET_KEY}
+      - ALGORITHM=${ALGORITHM}
+      - ACCESS_TOKEN_EXPIRE_MINUTES=${ACCESS_TOKEN_EXPIRE_MINUTES}
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+      - POSTGRES_DB=${DATABASE_NAME}
+    volumes: 
+      - postgres-db:/var/lib/postgresql/data  # /var/lib/postgresql/data是在container當中，並且postgres會把資料寫到這個路徑下
+
+
+volumes:
+  postgres-db: 
