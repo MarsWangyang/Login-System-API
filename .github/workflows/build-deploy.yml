@@ -1,0 +1,21 @@
+name: Build and Deploy Code # Even we have file name, you can still add name which is description to this file
+
+on: [push, pull_request] # when to trigger this workflow push: push code, pull: pull request happended
+  # This is example if you want a granular trigger
+  # push: 
+  #   branches: # trigger when specific branches
+  #     - "main"
+  #     - "anotherbranch"
+  # pull_request:
+  #   branches: 
+  #     - "test_branch"
+
+jobs: 
+  job1:
+    runs-on: ubuntu-latest # machine that the job will run on
+    steps:
+      - name:  pulling git repo # description for each steps 
+        uses: actions/checkout@v2
+      - name: say hi to mars
+        run: echo "hello Mars" # run script on your machine
+        
