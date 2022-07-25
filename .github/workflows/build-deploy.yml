@@ -38,7 +38,7 @@ jobs:
         ports:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
-        options: >-
+        options: >-   # remember no space under >-, you will get error constantly till you crazy...
           --health-cmd pg_isready
           --health-interval 10s
           --health-timeout 5s
@@ -60,4 +60,4 @@ jobs:
       - name: test with pytest # get env var error cuz database need all info to test code
         run: |
           pip install pytest
-          python -m pytest -v -s tests/
+          pytest
