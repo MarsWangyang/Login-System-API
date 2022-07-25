@@ -16,7 +16,7 @@ on: [push, pull_request] # when to trigger this workflow push: push code, pull: 
 jobs: 
   job1:
     environment:
-      Postgres database
+      name: Postgres database
     env: # this env is only for specific job workflow
       # hardcode environemental variables firstly,
       # First Method: we go to Settings => Secrets(Actions) => add repo secrets (This repo can access all these env vars)
@@ -31,17 +31,17 @@ jobs:
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
     services:
       postgres:
-          image: postgres 
-          env: 
-            POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-            POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
-          ports:
-            - 5432:5432
-          options: >-
-            --health-cmd pg_isready
-            --health-interval 10s
-            --health-timeout 5s
-            --health-retries 5
+        image: postgres 
+        env: 
+          POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+          POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
             
     runs-on: ubuntu-latest # machine that the job will run on
@@ -60,6 +60,5 @@ jobs:
         run: pip install -r requirements.txt
       - name: test with pytest # get env var error cuz database need all info to test code
         run: |
-          ls -l 
-          pip install pytest==7.1.2
+          pip install pytest
           python -m pytest -v -s tests/
