@@ -36,6 +36,7 @@ jobs:
           POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
           POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test1
         ports:
+          # Maps tcp port 5432 on service container to the host
           - 5432:5432
         options: >-
           --health-cmd pg_isready
