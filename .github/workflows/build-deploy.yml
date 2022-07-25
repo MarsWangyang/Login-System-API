@@ -21,14 +21,14 @@ jobs:
       # hardcode environemental variables firstly,
       # First Method: we go to Settings => Secrets(Actions) => add repo secrets (This repo can access all these env vars)
       # Second Method: Settings => Environments => New environment => the job workflow in .yml, add environment:
-      DATABASE_HOSTNAME: $DATABASE_HOSTNAME # actually no localhost database in this machine, you must install DB server or point to remote DB created in advanced
-      DATABASE_PORT: $DATABASE_PORT
-      DATABASE_PASSWORD: $DATABASE_PASSWORD
-      DATABASE_NAME: $DATABASE_NAME
-      DATABASE_USERNAME: $DATABASE_USERNAME
-      SECRET_KEY: $SECRET_KEY
-      ALGORITHM: $ALGORITHM
-      ACCESS_TOKEN_EXPIRE_MINUTES: $ACCESS_TOKEN_EXPIRE_MINUTES
+      DATABASE_HOSTNAME: ${{env.DATABASE_HOSTNAME}} # actually no localhost database in this machine, you must install DB server or point to remote DB created in advanced
+      DATABASE_PORT: ${{env.DATABASE_PORT}}
+      DATABASE_PASSWORD: ${{env.DATABASE_PASSWORD}}
+      DATABASE_NAME: ${{env.DATABASE_NAME}}
+      DATABASE_USERNAME: ${{env.DATABASE_USERNAME}}
+      SECRET_KEY: ${{env.SECRET_KEY}}
+      ALGORITHM: ${{env.ALGORITHM}}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${{env.ACCESS_TOKEN_EXPIRE_MINUTES}}
     services:
       postgres:
         image: postgres 
