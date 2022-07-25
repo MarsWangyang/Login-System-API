@@ -60,7 +60,5 @@ jobs:
         run: pip install -r requirements.txt
       - name: test with pytest # get env var error cuz database need all info to test code
         run: |
-          echo "error test 1"
-          pip install pytest
-          echo "error test 2"  
-          pytest   
+          pip install pytest==7.1.2
+          pytest
