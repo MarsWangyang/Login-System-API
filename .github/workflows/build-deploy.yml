@@ -60,4 +60,4 @@ jobs:
       - name: test with pytest # get env var error cuz database need all info to test code
         run: |
           pip install pytest
-          pytest
+          pytest tests/
