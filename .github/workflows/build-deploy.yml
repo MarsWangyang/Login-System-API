@@ -21,14 +21,14 @@ jobs:
       # hardcode environemental variables firstly,
       # First Method: we go to Settings => Secrets(Actions) => add repo secrets (This repo can access all these env vars)
       # Second Method: Settings => Environments => New environment => the job workflow in .yml, add environment:
-      DATABASE_HOSTNAME: ${{ secrets.DATABASE_HOSTNAME }} # actually no localhost database in this machine, you must install DB server or point to remote DB created in advanced
-      DATABASE_PORT: ${{ secrets.DATABASE_PORT }}
-      DATABASE_PASSWORD: ${{ secrets.DATABASE_PASSWORD }}
-      DATABASE_NAME: ${{ secrets.DATABASE_NAME }}
-      DATABASE_USERNAME: ${{ secrets.DATABASE_USERNAME }} 
-      SECRET_KEY: ${{ secrets.SECRET_KEY }}
-      ALGORITHM: ${{ secrets.ALGORITHM }}
-      ACCESS_TOKEN_EXPIRE_MINUTES: ${{ secrets.ACCESS_TOKEN_EXPIRE_MINUTES }}
+      DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}} # actually no localhost database in this machine, you must install DB server or point to remote DB created in advanced
+      DATABASE_PORT: ${{secrets.DATABASE_PORT}}
+      DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
+      DATABASE_NAME: ${{secrets.DATABASE_NAME}}
+      DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}} 
+      SECRET_KEY: ${{secrets.SECRET_KEY}}
+      ALGORITHM: ${{secrets.ALGORITHM}}
+      ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
     services:
       postgres:
         image: postgres 
@@ -57,7 +57,7 @@ jobs:
         run: python -m pip install --upgrade pip
       - name: import all dependencies
         run: python -m pip install -r requirements.txt
-      - name: install pytest # get env var error cuz database need all info to test code
-        run: pip install pytest
-      - name: test with pytest
-        run: pytest -v -s 
+      - name: test with pytest # get env var error cuz database need all info to test code
+        run: |
+          pip install pytest
+          pytest 
