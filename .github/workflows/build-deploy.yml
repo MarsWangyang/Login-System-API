@@ -16,7 +16,7 @@ on: [push, pull_request] # when to trigger this workflow push: push code, pull: 
 jobs: 
   job1:
     environment:
-      name: Postgres database
+      name: testing
     env: # this env is only for specific job workflow
       # hardcode environemental variables firstly,
       # First Method: we go to Settings => Secrets(Actions) => add repo secrets (This repo can access all these env vars)
