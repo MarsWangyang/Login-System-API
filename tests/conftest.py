@@ -73,6 +73,7 @@ TestSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 # default scope == function ，每一個function就跑一次fixture
 @pytest.fixture(scope="function")
 def session():
+    print("my session fixture ran")
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
     db = TestSessionLocal()
