@@ -24,18 +24,18 @@ jobs:
       DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}} # actually no localhost database in this machine, you must install DB server or point to remote DB created in advanced
       DATABASE_PORT: ${{secrets.DATABASE_PORT}}
       DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-      DATABASE_NAME: fastapi
+      DATABASE_NAME: postgres
       DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}} 
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
     services:
       postgres:
-        image: postgres:latest 
+        image: postgres 
         env: 
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-          POSTGRES_DB: fastapi_test
+          POSTGRES_DB: postgres_test
         ports:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
